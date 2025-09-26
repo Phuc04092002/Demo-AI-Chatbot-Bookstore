@@ -1,5 +1,5 @@
 import streamlit as st
-from Run_model_demo.Chatbot_demo import process_user_input
+from Chatbot_demo import process_user_input
 
 st.title("Chatbot BookStore Demo")
 

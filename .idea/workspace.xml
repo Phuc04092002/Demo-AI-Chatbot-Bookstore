@@ -5,30 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb39b3de-a4e4-42a7-83e0-65262c4814ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Demo_chatbot_bookstore.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Create_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Prompting_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Run_model_demo/Chatbot_demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Run_model_demo/UI_demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test_demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Train_test_split.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore_requests_balanced.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connect_mySQL.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/create _data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/create_data_train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/label_encoder_1.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/model_xgb_1.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mySQL_DB_file/bookstore.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_router_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/val_router_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chatbot_demo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI_demo_(Gradio).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Run_model_demo/Chatbot_demo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Run_model_demo/UI_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI_demo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,35 +37,82 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.Create_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Prompting_model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test_demo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Train_test_split.executor&quot;: &quot;Run&quot;,
-    &quot;Python.UI_demo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.connect_mySQL.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_data_train.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cretae _data.executor&quot;: &quot;Run&quot;,
-    &quot;Python.db_utils.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/taola/PycharmProjects/Demo_chatbot_bookstore&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.Chatbot_demo (1).executor": "Run",
+    "Python.Chatbot_demo (2).executor": "Run",
+    "Python.Create_model.executor": "Run",
+    "Python.Prompting_model.executor": "Run",
+    "Python.Test.executor": "Run",
+    "Python.Test_demo.executor": "Run",
+    "Python.Train_test_split.executor": "Run",
+    "Python.UI_demo.executor": "Run",
+    "Python.connect_mySQL.executor": "Run",
+    "Python.create_data_train.executor": "Run",
+    "Python.cretae _data.executor": "Run",
+    "Python.db_utils.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/taola/PycharmProjects/Demo_chatbot_bookstore",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore" />
       <recent name="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore\mySQL_DB_file" />
       <recent name="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore\Run_model_demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.UI_demo">
+  <component name="RunManager" selected="Python.Chatbot_demo (2)">
+    <configuration name="Chatbot_demo (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Demo_chatbot_bookstore" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Run_model_demo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Run_model_demo/Chatbot_demo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Chatbot_demo (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Demo_chatbot_bookstore" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chatbot_demo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Chatbot_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Demo_chatbot_bookstore" />
       <option name="ENV_FILES" value="" />
@@ -129,28 +157,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Train_test_split" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Demo_chatbot_bookstore" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Train_test_split.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="UI_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Demo_chatbot_bookstore" />
       <option name="ENV_FILES" value="" />
@@ -164,29 +170,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore\Run_model_demo\UI_demo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="create _data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Demo_chatbot_bookstore" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore\create _data.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\taola\PycharmProjects\Demo_chatbot_bookstore\UI_demo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -197,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Chatbot_demo (2)" />
+        <item itemvalue="Python.Chatbot_demo (1)" />
         <item itemvalue="Python.UI_demo" />
         <item itemvalue="Python.Chatbot_demo" />
         <item itemvalue="Python.Create_model" />
-        <item itemvalue="Python.Train_test_split" />
-        <item itemvalue="Python.create _data" />
       </list>
     </recent_temporary>
   </component>

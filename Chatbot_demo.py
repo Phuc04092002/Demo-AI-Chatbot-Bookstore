@@ -2,6 +2,7 @@ import mysql.connector
 import joblib
 from sentence_transformers import SentenceTransformer
 from langchain.prompts import PromptTemplate
+from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain_community.llms import Ollama
 from fuzzywuzzy import process
 import re
@@ -9,17 +10,23 @@ import json
 
 
 embed_model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
-clf = joblib.load("../model/model_xgb_1.pkl")
-label_encoder = joblib.load("../model/label_encoder_1.pkl")
+clf = joblib.load("model/model_xgb_1.pkl")
+label_encoder = joblib.load("model/label_encoder_1.pkl")
 
 
 def classify_intent(user_input: str) -> str:
+    # Rule-based ưu tiên, chỉ nhận diện place_order khi có từ khóa hành động
+    order_keywords = r"(mua|đặt|giao|ship|lấy|đơn hàng|nhận|gửi|tới|đến|sdt|phone|đt|địa chỉ)"
+    detail_keywords = r"(giá|tác giả|thể loại|xuất bản|nội dung|còn không|thông tin|bao nhiêu|còn|stock|cuốn|quyển|bản|ai)"
+    if re.search(order_keywords, user_input, re.IGNORECASE):
+        return "place_order"
+    if re.search(detail_keywords, user_input, re.IGNORECASE):
+        return "detail_book"
+
     emb = embed_model.encode([user_input])
     pred_label = clf.predict(emb)[0]
     intent = label_encoder.inverse_transform([pred_label])[0]
     return intent
-
-
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -69,17 +76,57 @@ def lookup_book(book_title: str) -> str:
         return f"Không tìm thấy sách '{book_title}'."
 
 
-llm = Ollama(model="llama3.2:1b")
+# llm = Ollama(model="llama3.2:1b")
+# entity_prompt = PromptTemplate(
+#     input_variables=["user_input"],
+#     template="""
+# Bạn là extractor cho chatbot BookStore. Trả về JSON với các trường:
+# "book_title", "quantity", "address", "phone".
+# Chỉ trả về JSON, KHÔNG giải thích.
+# Câu: {user_input}
+# """
+# )
+# chain = entity_prompt | llm
+#___________________________________________________________
+# 1. Định nghĩa schema cho JSON
+response_schemas = [
+    ResponseSchema(name="book_title", description="Tên sách mà khách muốn mua"),
+    ResponseSchema(name="quantity", description="Số lượng sách cần mua, là số nguyên"),
+    ResponseSchema(name="address", description="Địa chỉ giao hàng của khách"),
+    ResponseSchema(name="phone", description="Số điện thoại của khách hàng")
+]
+
+# 2. Tạo parser
+output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+
+# Lấy format hướng dẫn cho LLM (ví dụ JSON mẫu)
+format_instructions = output_parser.get_format_instructions()
+
+# 3. Prompt template
 entity_prompt = PromptTemplate(
-    input_variables=["user_input"],
     template="""
-Bạn là extractor cho chatbot BookStore. Trả về JSON với các trường:
-"book_title", "quantity", "address", "phone".
-Chỉ trả về JSON, KHÔNG giải thích.
+Bạn là extractor cho chatbot BookStore.
+Hãy phân tích câu sau và xuất ra JSON theo đúng định dạng.
+
+⚠️ Chỉ trả về một JSON object duy nhất, KHÔNG dùng markdown, KHÔNG bọc trong [].
+- "book_title": chỉ chứa tên sách
+- "quantity": chỉ chứa số nguyên
+- "address": chỉ chứa mỗi địa chỉ, không được có "Địa chỉ giao hàng:", không có số điện thoại
+- "phone": chỉ chứa số điện thoại (chỉ số, không chữ)
+
 Câu: {user_input}
-"""
+
+{format_instructions}
+""",
+    input_variables=["user_input"],
+    partial_variables={"format_instructions": format_instructions}
 )
-chain = entity_prompt | llm
+
+# 4. LLM model
+llm = Ollama(model="llama3.2:1b")
+
+# 5. Tạo chain
+chain = entity_prompt | llm | output_parser
 
 VIETNAMESE_NUMBERS = {
     "một": 1, "mốt": 1,
@@ -107,24 +154,36 @@ def normalize_quantity(text: str) -> int:
 
 
 def extract_order_entities(user_input: str) -> dict:
+    # try:
+    #
+    #     json_str = chain.invoke({"user_input": user_input})
+    #     if isinstance(json_str, dict) and "text" in json_str:
+    #         json_str = json_str["text"]
+    #     order = json.loads(json_str)
+    #
+    #     order["book_title"] = order.get("book_title", "").strip().rstrip(",. ")
+    #     order["quantity"] = int(order.get("quantity", 1))
+    #     order["address"] = order.get("address", "Unknown").strip().rstrip(",. ")
+    #     order["phone"] = order.get("phone", "Unknown").strip().rstrip(",. ")
+    #     if not order["book_title"]:
+    #         raise ValueError("Empty book_title from LLM")
+    #     return order
+    #
+    # except Exception as e:
+    #     print("LLM parse fail:", e, "| Input:", user_input)
     try:
+        raw_output = llm.invoke(entity_prompt.format(user_input=user_input))
+        print("LLM raw output:", raw_output)
 
-        json_str = chain.invoke({"user_input": user_input})
-        if isinstance(json_str, dict) and "text" in json_str:
-            json_str = json_str["text"]
-        order = json.loads(json_str)
-
+        order = chain.invoke({"user_input": user_input})
+        # Normalize giá trị
         order["book_title"] = order.get("book_title", "").strip().rstrip(",. ")
-        order["quantity"] = int(order.get("quantity", 1))
+        order["quantity"] = int(order.get("quantity", 1)) if order.get("quantity") else 1
         order["address"] = order.get("address", "Unknown").strip().rstrip(",. ")
         order["phone"] = order.get("phone", "Unknown").strip().rstrip(",. ")
-        if not order["book_title"]:
-            raise ValueError("Empty book_title from LLM")
         return order
-
     except Exception as e:
         print("LLM parse fail:", e, "| Input:", user_input)
-
         phone_match = re.search(
             r'(?:số điện thoại|đt|phone)?[:\s]*([\d\s-]{5,15})',
             user_input,
@@ -146,12 +205,22 @@ def extract_order_entities(user_input: str) -> dict:
         )
         address = addr_match.group(1).strip() if addr_match else "Unknown"
         if address != "Unknown":
+        # Xóa từ khóa nếu còn sót
+            address = re.sub(r'^(tới|đến|địa chỉ|giao|về|ở)\s+', '', address, flags=re.IGNORECASE)
+        # Xóa dấu câu thừa
             address = re.sub(r'[\s,\.]+$', '', address)
+
 
         # qty_match = re.search(r'(\d+)\s*(?:cuốn|quyển|bản)?', temp_input, re.IGNORECASE)
         # quantity = int(qty_match.group(1)) if qty_match else 1
 
         quantity = normalize_quantity(temp_input)
+        temp_input = re.sub(
+            r'\b(cho|tôi|muốn|mua|đặt|giao|lấy|cuốn|quyển|bản)\b',
+            '',
+            temp_input,
+            flags=re.IGNORECASE
+        ).strip()
 
         book_match = re.search(
             r'(?:mua|đặt|tôi muốn đặt|tôi muốn mua)?\s*(?:một|hai|ba|\d+)?\s*(?:cuốn|quyển|bản)?\s*([^\d,\.]+?)(?=\s*(?:tới|đến|địa chỉ|ở|sdt|phone|,|$))',
@@ -166,6 +235,11 @@ def extract_order_entities(user_input: str) -> dict:
             "address": address,
             "phone": phone
         }
+
+#______________________________________________________
+
+
+#________________________________________________________
 
 
 def place_order(order: dict, customer_name="Khách hàng") -> str:
@@ -203,6 +277,9 @@ def place_order(order: dict, customer_name="Khách hàng") -> str:
         conn.close()
         return f"Sách '{matched_title}' chỉ còn {stock} quyển, không đủ số lượng {order['quantity']}."
 
+    address = order.get("address", "Unknown").strip()
+    address = re.sub(r"^(địa chỉ giao hàng:|giao về)\s*", "", address, flags=re.IGNORECASE)
+
     cursor.execute("""
         INSERT INTO orders (customer_name, phone, address, book_id, quantity, status)
         VALUES (%s, %s, %s, %s, %s, %s)
@@ -210,7 +287,8 @@ def place_order(order: dict, customer_name="Khách hàng") -> str:
     conn.commit()
     conn.close()
 
-    return f"Đơn hàng {order['quantity']} quyển '{matched_title}' đã được ghi nhận, giao tới {order['address']}."
+    return f"Đơn hàng {order['quantity']} quyển '{matched_title}' đã được ghi nhận, giao tới {address}."
+
 
 
 pending_order = None
