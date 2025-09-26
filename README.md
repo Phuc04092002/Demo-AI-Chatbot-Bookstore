@@ -4,6 +4,8 @@ Cách chạy demo chatbot:
 - Kết nối tới MySQL trong file Chatbot_demo.py
 - Mở terminal trong project, chạy lệnh streamlit run UI_demo để chạy demo với Streamlit.
 - Mở terminal và run UI_demo_(Gradio).py để chạy demo với Gradio
+
+
 Một số vấn đề có thể cải thiện của chatbot hiện tại:
 - Tập dữ liệu huấn luyện xác định yêu cầu lớn hơn, đa dạng hơn sẽ giúp mô hình xác định mục đích của yêu cầu chính xác hơn
 - Có thể dùng các LLM có số tham số lớn hơn thay vì Llama 3.2 1B để extract information thành file JSON chính xác và đúng ý hơn, bù lại chatbot sẽ triển khai chậm hơn
