@@ -1,3 +1,4 @@
+HIỆN TẠI CHATBOT DEMO CHẠY LOCAL, XIN HÃY LÀM THEO HƯỚNG DẪN DƯỚI ĐÂY ĐỂ KIỂM THỬ
 Cách chạy demo chatbot:
 - File code chatbot là Chatbot_demo.py
 - Cài đặt các thư viện yêu cầu trong requirement.txt
